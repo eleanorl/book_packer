@@ -1,0 +1,25 @@
+This problem is a classic NP-Hard problem, and finding the absolute minimal
+solution is not practical for large numbers of books.  I used the Best Fit
+Decreasing algorithm, which guarantees to 11/9 N_{opt}+1 boxes in the worst case
+and runs in O(nlog(n)) time.  The algorithm works as follows:
+
+1. Sort all books by weight in decreasing order O(nlog(n))
+2. Place first book into first box that will fit - use binary search, O(log(n))
+3. Re-sort boxes in order by decreasing weight - only one item is out of order, use bisection, O(log(n))
+4. Repeat for all books, O(n)*O(log(n))
+
+To use the program, put it in the same directory as the data folder.  Type
+
+python book_packer.py N
+
+where N is an integer and represents the number of boxes you request.
+
+This outputs packing_list.JSON
+
+
+-----------
+Extensions
+
+1. One would need to rewrite the regex scraping part in the Book class.  Other than that, everything can stay as is.
+2. As long as the the product has a weight attribute, this would work - though in real life, packing boxes depends more on volume rather than weight.  That would require solving a 3D bin-packing problem, which is quite a bit more challenging.  Ignoring that, we could change the book object into a generic object and replace Title and Author etc into Product Name, Maker and so on.  Nothing else would have to change.
+3. This implementation is already O(nlog(n)).
